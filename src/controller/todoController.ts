@@ -17,7 +17,7 @@ export const getTodos: RequestHandler = (req, res, next) => {
   res.json({tasks: TODOS})
 }
 
-export const patchTodos: RequestHandler<{id: string}> = (req, res, next) => {
+export const patchTodo: RequestHandler<{id: string}> = (req, res, next) => {
   const id = req.params.id
   const text = (req.body as {text: string}).text
 
@@ -29,4 +29,18 @@ export const patchTodos: RequestHandler<{id: string}> = (req, res, next) => {
 
   todo!.text = text
   res.json({message: "Task updated", patchedTodo: todo})
+}
+
+export const deleteTodo: RequestHandler<{id: string}> = (req, res, next) => {
+  const id = req.params.id
+
+  const todoIndex = TODOS.findIndex(todo => todo.id === id)
+
+  if (todoIndex < 0) {
+    throw new Error("Cannot find the task with id: " + id)
+  }
+
+  TODOS.splice(todoIndex, 1)
+
+  res.json({ message: `Task with id: ${id} has been deleted` })
 }
