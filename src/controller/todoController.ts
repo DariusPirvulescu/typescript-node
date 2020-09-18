@@ -14,33 +14,33 @@ export const createTodo: RequestHandler = (req, res, next) => {
 };
 
 export const getTodos: RequestHandler = (req, res, next) => {
-  res.json({tasks: TODOS})
-}
+  res.json({ tasks: TODOS });
+};
 
-export const patchTodo: RequestHandler<{id: string}> = (req, res, next) => {
-  const id = req.params.id
-  const text = (req.body as {text: string}).text
+export const patchTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+  const id = req.params.id;
+  const text = (req.body as { text: string }).text;
 
-  const todo = TODOS.find(todo => todo.id === id)
+  const todo = TODOS.find((todo) => todo.id === id);
 
   if (!todo) {
-    throw new Error("Cannot find the task with id: " + id)
+    throw new Error("Cannot find the task with id: " + id);
   }
 
-  todo!.text = text
-  res.json({message: "Task updated", patchedTodo: todo})
-}
+  todo!.text = text;
+  res.json({ message: "Task updated", patchedTodo: todo });
+};
 
-export const deleteTodo: RequestHandler<{id: string}> = (req, res, next) => {
-  const id = req.params.id
+export const deleteTodo: RequestHandler<{ id: string }> = (req, res, next) => {
+  const id = req.params.id;
 
-  const todoIndex = TODOS.findIndex(todo => todo.id === id)
+  const todoIndex = TODOS.findIndex((todo) => todo.id === id);
 
   if (todoIndex < 0) {
-    throw new Error("Cannot find the task with id: " + id)
+    throw new Error("Cannot find the task with id: " + id);
   }
 
-  TODOS.splice(todoIndex, 1)
+  TODOS.splice(todoIndex, 1);
 
-  res.json({ message: `Task with id: ${id} has been deleted` })
-}
+  res.json({ message: `Task with id: ${id} has been deleted` });
+};

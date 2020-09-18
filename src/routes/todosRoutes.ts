@@ -1,6 +1,11 @@
 import { Router } from "express";
 
-import { createTodo, getTodos, patchTodo, deleteTodo } from "../controller/todoController";
+import {
+  createTodo,
+  getTodos,
+  patchTodo,
+  deleteTodo,
+} from "../controller/todoController";
 
 const router = Router();
 
